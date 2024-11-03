@@ -7,7 +7,6 @@
 #'
 #' @return nothing
 #' @export
-#'
 play_2048 = function(){
   x = new_board() %>%
     add_2()
@@ -22,4 +21,3 @@ play_2048 = function(){
 
   invisible(NULL)
 }
-

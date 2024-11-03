@@ -1,3 +1,4 @@
+#' @importFrom tibble tibble
 new_board = function(seed=42){
   set.seed(seed)
   x = tibble(id=1:16, row=rep(1:4, each=4), col=rep(1:4, times=4), value=NA)
@@ -5,7 +6,7 @@ new_board = function(seed=42){
   x
 }
 
-#' @export
+#' @importFrom ggplot2 aes coord_fixed geom_text geom_tile ggplot scale_x_continuous scale_y_reverse theme theme_void
 plot.board2048 = function(x){
   p = x %>%
     ggplot(aes(x=col, y=row, fill=value, label=value)) +
@@ -21,7 +22,10 @@ plot.board2048 = function(x){
 }
 
 #' @export
-print.board2048 = function(x){
+#' @importFrom dplyr mutate select
+#' @importFrom stringr str_pad
+#' @importFrom tidyr pivot_wider replace_na
+print.board2048 = function(x, ...){
   a = as.data.frame(x) %>%
     mutate(value=replace_na(as.character(value), "")) %>%
     select(-id) %>%

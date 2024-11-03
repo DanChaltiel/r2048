@@ -1,4 +1,5 @@
 
+#' @importFrom stats runif
 add_2 = function(x){
   random_i = runif(1, min=1, max=sum(is.na(x$value))+1) %>% floor()
   x$value[is.na(x$value)][random_i] = 2
@@ -6,6 +7,7 @@ add_2 = function(x){
 }
 
 
+#' @importFrom dplyr arrange desc
 apply_func = function(x, dir, f){
   if(dir=="right"){
     x = x %>%
@@ -33,6 +35,7 @@ apply_func = function(x, dir, f){
 move = function(x, dir) apply_func(x, dir, move1)
 merge = function(x, dir) apply_func(x, dir, merge1)
 
+#' @importFrom dplyr mutate
 move1 = function(x, .by){
   x %>%
     mutate(
@@ -41,6 +44,8 @@ move1 = function(x, .by){
     )
 }
 
+#' @importFrom dplyr arrange consecutive_id lag mutate select
+#' @importFrom tidyr replace_na
 merge1 = function(x, .by){
   x %>%
     mutate(
@@ -55,6 +60,7 @@ merge1 = function(x, .by){
     arrange(id)
 }
 
+#' @importFrom tibble lst
 apply_merge_mask = function(x){
   stopifnot(length(x)==4)
   lookup_table = lst(
