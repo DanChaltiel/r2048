@@ -1,2 +1,8 @@
 # r2048
- The 2048 game in R
+ 
+## How to play
+
+```R
+pak::pak("DanChaltiel/r2048")
+r2048::play_2048()
+```
